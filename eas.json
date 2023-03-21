@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "version": ">= 3.5.2"
-  },
   "build": {
     "development": {
       "developmentClient": true,
@@ -17,13 +14,17 @@
       }
     },
     "production": {
+      "channel": "production",
       "ios": {
         "resourceClass": "m1-medium"
       }
     },
-    "androidapk": {
+    "production2": {
       "android": {
         "buildType": "apk"
+      },
+      "ios": {
+        "resourceClass": "m1-medium"
       }
     }
   },
