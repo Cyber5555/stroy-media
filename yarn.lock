@@ -8907,6 +8907,11 @@ react-native-dynamic-vector-icons@WrathChaos/react-native-dynamic-vector-icons:
   dependencies:
     react-native-vector-icons ">= 6.x.x"
 
+react-native-eject@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-eject/-/react-native-eject-0.2.0.tgz#84b5bd123e883562e72801d23028bff062f9fbb3"
+  integrity sha512-muPhImNfKWa9hsdkrYeIkXM8/6lhZj3NnFCxI7kRrD3F50l6a6lc7crRWjg0i0aBt6XdkoE4efATjxCRkmTOFA==
+
 react-native-flash-message@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/react-native-flash-message/-/react-native-flash-message-0.4.0.tgz#22781a8d3c4d12498fb5ff778efeda2044cf6040"
