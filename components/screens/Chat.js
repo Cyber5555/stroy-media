@@ -82,10 +82,11 @@ function Chat(props) {
       aspect: [1, 1],
       quality: 0,
     });
-    if (!result.cancelled) {
-      getImageFormat(result.uri);
-      setFileName(result.uri.split("/").pop());
-      setFilePath(result.uri);
+    if (!result.canceled) {
+      getImageFormat(result.assets[0].uri);
+      setFileName(result.assets[0].uri.split("/").pop());
+      setFilePath(result.assets[0].uri);
+      console.log(result);
     }
   };
   const sendMessage = () => {
@@ -280,7 +281,7 @@ function Chat(props) {
   };
 
   const renderItem = ({ item, index }) => {
-    dialog ? setId(item?.to?.last_id) : setId(item.last_id);
+    dialog ? setId(item?.to?.last_id) : setId(item?.last_id);
     return (
       <View style={styles.item}>
         <Image
@@ -427,7 +428,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   listWrapper: {
-    height: Dimensions.get("window").height - 100,
+    height:
+      Dimensions.get("window").height - Platform.OS === "ios" ? -120 : -100,
     paddingBottom: 80,
   },
   item: {

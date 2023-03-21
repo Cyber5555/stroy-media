@@ -147,12 +147,12 @@ const MyProfile = ({ route, navigation }) => {
       aspect: [1, 1],
       quality: 0,
     });
-    console.log(await getFileInfo(result.uri));
-    if (!result.cancelled) {
-      setFileSize(await getFileInfo(result.uri));
+    console.log(await getFileInfo(result.assets[0].uri));
+    if (!result.canceled) {
+      setFileSize(await getFileInfo(result.assets[0].uri));
       setImage(result);
     } else {
-      console.log(await getFileInfo(result.uri));
+      console.log(await getFileInfo(result.assets[0].uri));
     }
   };
 

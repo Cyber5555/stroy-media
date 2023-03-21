@@ -12,21 +12,22 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/7c5daa52-ad38-46bd-8c67-2f71d9154219"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.JustCode.StroyMedia"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan",
-      "package": "com.stroyMedia.yourappname"
+      "package": "com.JustCode.StroyMedia",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,7 +35,7 @@
     "description": "",
     "extra": {
       "eas": {
-        "projectId": "2c872b93-9e7a-499f-bba4-ce719ac5d38b"
+        "projectId": "ecc77aec-90a6-4ba9-91de-dc6abb22c671"
       }
     }
   },

@@ -259,9 +259,9 @@ function CreatingApplication(props) {
       aspect: [1, 1],
       quality: 0,
     });
-    if (!result.cancelled) {
-      setFileName(result.uri.split("/").pop());
-      setSelectedImage(result.uri);
+    if (!result.canceled) {
+      setFileName(result.assets[0].uri.split("/").pop());
+      setSelectedImage(result.assets[0].uri);
     }
   };
 
