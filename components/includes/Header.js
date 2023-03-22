@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import {
   COLOR_1,
   COLOR_5,
@@ -123,6 +117,9 @@ function Header(props) {
                 </View>
               </View>
             )}
+            {!data && (
+              <Text style={styles.noDataText}>У Вас нет уведомлений</Text>
+            )}
           </View>
         </View>
       </Modal>
@@ -221,6 +218,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     marginTop: 5,
+  },
+  noDataText: {
+    textAlign: "center",
+    marginTop: 50,
+    fontFamily: "GothamProRegular",
+    color: COLOR_1,
+    fontSize: 20,
   },
 });
 
