@@ -428,8 +428,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   listWrapper: {
-    height:
-      Dimensions.get("window").height - Platform.OS === "ios" ? -120 : -100,
+    // flex: 1,
+    // width: "100%",
+    // height:
+    //   Dimensions.get("window").height - Platform.OS === "ios" ? -120 : -100,
     paddingBottom: 80,
   },
   item: {

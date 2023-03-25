@@ -10,7 +10,7 @@ export const addFavoriteRequest = createAsyncThunk(
         return result;
       })
       .catch((error) => {
-        return error
+        return error;
       });
   }
 );
