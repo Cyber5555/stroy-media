@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   title: {
     color: COLOR_1,
     fontFamily: "GothamProMedium",
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 14,
     fontWeight: "900",
   },

@@ -154,6 +154,7 @@ function Participants(props) {
                   "Другое",
                 ]}
                 onSelect={(option) => {
+                  console.log(option);
                   setRole(option);
                   filtered(cityId, option, searchValue);
                 }}
@@ -164,9 +165,9 @@ function Participants(props) {
                 title={cityName ? cityName : "Город"}
                 options={citys}
                 onSelect={(option) => {
-                  setCityId(option.last_id);
-                  filtered(option.last_id, role, searchValue);
-                  setCityName(option.title.ru || option.title);
+                  setCityId(option?.last_id);
+                  filtered(option?.last_id, role, searchValue);
+                  setCityName(option?.title.ru || option?.title);
                 }}
                 top={10}
               />

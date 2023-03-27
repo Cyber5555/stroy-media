@@ -9,7 +9,7 @@ function Search(props) {
   return (
     <View style={[styles.wrapper, style]}>
       <MyInput
-        value={searchText?searchText:value}
+        value={searchText ? searchText : value}
         onChangeText={(value) => onSearchText(value)}
         style={styles.input}
         filtered={searchText ? true : false}

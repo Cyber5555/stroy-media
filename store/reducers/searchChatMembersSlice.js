@@ -6,9 +6,10 @@ export const searchMembersRequest = createAsyncThunk(
   async (data) => {
     try {
       const result = await api.post("/chat-search-contact", data);
+      // console.log(result.data);
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -19,6 +20,7 @@ const searchMembersSlice = createSlice({
     loading: false,
     error: false,
     data: [],
+    success: false,
   },
   reducers: {},
   extraReducers: {
@@ -26,8 +28,9 @@ const searchMembersSlice = createSlice({
       state.loading = true;
     },
     [searchMembersRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.users;
+      state.data = action.payload?.data?.data?.users;
       state.error = false;
+      state.success = action.payload?.data?.success;
     },
     [searchMembersRequest.rejected]: (state) => {
       state.error = true;

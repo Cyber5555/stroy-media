@@ -124,7 +124,9 @@ const MyProfile = ({ route, navigation }) => {
   }
 
   const openCitysModal = () => {
+    console.log(isOpenCitys);
     setIsOpenCitys(!isOpenCitys);
+    setSearchValue("");
   };
 
   const getFileInfo = async (fileURI) => {
@@ -186,6 +188,7 @@ const MyProfile = ({ route, navigation }) => {
   const countrysRenderItem = ({ item }) => {
     return (
       <TouchableOpacity
+        style={{ marginVertical: 5 }}
         onPress={() => {
           setCompanyCountryName(item.title.ru.replace(/\(RU\)/, ""));
           setCountry(item.last_id);
@@ -444,7 +447,7 @@ const MyProfile = ({ route, navigation }) => {
     setselectedItems(selectedItems);
   };
   useEffect(() => {
-    searchValue && filtered(searchValue);
+    filtered(searchValue);
   }, [searchValue]);
   return (
     <Wrapper
@@ -501,7 +504,7 @@ const MyProfile = ({ route, navigation }) => {
             numberTel={true}
             phoneNumber={phoneNumber}
             placeholder={user?.phone}
-            onChangeText={(phoneNumber) => setPhoneNumber("+7" + phoneNumber)}
+            onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
             keyboardType={"phone-pad"}
           />
           <BlockWithSwitchButton
@@ -546,7 +549,7 @@ const MyProfile = ({ route, navigation }) => {
             >
               <View style={styles.citysSearch}>
                 <DelayInput
-                  placeholder="Search"
+                  placeholder="Поиск"
                   value={searchValue}
                   minLength={1}
                   onChangeText={(text) => setSearchValue(text)}
@@ -555,6 +558,9 @@ const MyProfile = ({ route, navigation }) => {
                 />
               </View>
               <View style={{ marginBottom: 60 }}>
+                {citys.length === 0 && (
+                  <Text style={styles.no_product}>Не найдено</Text>
+                )}
                 <FlatList
                   data={citys}
                   keyExtractor={(item) => item.last_id}
@@ -607,6 +613,9 @@ const MyProfile = ({ route, navigation }) => {
                 />
               </View>
               <View style={{ marginBottom: 60 }}>
+                {citys.length === 0 && (
+                  <Text style={styles.no_product}>Не найдено</Text>
+                )}
                 <FlatList
                   data={citys}
                   keyExtractor={(item) => item.last_id}
@@ -632,6 +641,7 @@ const MyProfile = ({ route, navigation }) => {
               isopenModal={openCompanyCountryModal}
             >
               <FlatList
+                style={{ height: "80%" }}
                 data={countrys}
                 keyExtractor={(item) => item.last_id}
                 renderItem={countrysRenderItem}
@@ -708,12 +718,12 @@ const MyProfile = ({ route, navigation }) => {
               marginLeft: 16,
             }}
           >
-            {activeRole["operatorkp"] !== 0 && activeRole["operatorkp"] + " "}
-            {activeRole["other"] !== 0 && activeRole["other"] + " "}
-            {activeRole["owner"] !== 0 && activeRole["owner"] + " "}
-            {activeRole["ownercargo"] !== 0 && activeRole["ownercargo"] + " "}
-            {activeRole["ownerpc"] !== 0 && activeRole["ownerpc"] + " "}
-            {activeRole["sealine"] !== 0 && activeRole["sealine"] + " "}
+            {/* {activeRole["operatorkp"] !== 0 && activeRole["operatorkp"] + " "} */}
+            {/* {activeRole["other"] !== 0 && activeRole["other"] + " "} */}
+            {/* {activeRole["owner"] !== 0 && activeRole["owner"] + " "} */}
+            {/* {activeRole["ownercargo"] !== 0 && activeRole["ownercargo"] + " "} */}
+            {/* {activeRole["ownerpc"] !== 0 && activeRole["ownerpc"] + " "} */}
+            {/* {activeRole["sealine"] !== 0 && activeRole["sealine"] + " "} */}
           </Text>
           {/* </View> */}
           <MyInput
@@ -1077,6 +1087,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR_6,
     borderRadius: 9,
     marginBottom: 20,
+  },
+  no_product: {
+    textAlign: "center",
+    marginTop: 50,
   },
 });
 

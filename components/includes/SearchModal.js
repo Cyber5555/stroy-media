@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import MyButton from "./MyButton";
 import { COLOR_1, COLOR_5 } from "../helpers/Variables";
 import MyInput from "./MyInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { searchMembersRequest } from "../../store/reducers/searchChatMembersSlice";
 import { AntDesign } from "@expo/vector-icons";
@@ -22,6 +22,10 @@ function SearchModal(props) {
   } = props;
   const [token, setToken] = useState();
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const [valueError, setValueError] = useState("");
+  const [fio, setFio] = useState("");
+
   useEffect(() => {
     AsyncStorage.getItem("token").then((result) => {
       if (result) {
@@ -31,14 +35,27 @@ function SearchModal(props) {
   });
 
   const submith = () => {
-    onClick();
-    dispatch(
-      searchMembersRequest({
-        secret_token: token,
-        company_name: value,
-        contact_person: name,
-      })
-    );
+    if (!value) {
+      setValueError("Заполните эту строку");
+      // if (!value) {
+      //   setValueError("Заполните эту строку");
+      //   return;
+      // }
+      return;
+    }
+    if (!fio) {
+      setFio("Заполните эту строку");
+      return;
+    }
+    if (value && fio) {
+      dispatch(
+        searchMembersRequest({
+          secret_token: token,
+          company_name: value,
+          contact_person: name,
+        })
+      );
+    }
   };
 
   return (
@@ -74,6 +91,7 @@ function SearchModal(props) {
           onChangeText={onChangeText}
           autoCapitalize={"none"}
           multiline
+          error={[valueError]}
           style={{
             height: undefined,
             lineHeight: 16,
@@ -81,12 +99,14 @@ function SearchModal(props) {
             fontFamily: "GothamProMedium",
           }}
         />
+
         <Text style={styles.commentText}>Ф.И.О. пользователя</Text>
         <MyInput
           value={name}
           onChangeText={onChangeName}
           autoCapitalize={"none"}
           multiline
+          error={[fio]}
           style={{
             height: undefined,
             lineHeight: 16,
@@ -123,7 +143,7 @@ const styles = StyleSheet.create({
   title: {
     color: COLOR_1,
     fontFamily: "GothamProMedium",
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 14,
     fontWeight: "900",
     marginBottom: 32,
@@ -145,7 +165,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontFamily: "GothamProMedium",
     fontSize: 14,
-    fontWeight:'900'
+    fontWeight: "900",
   },
   ratingText: {
     color: "#666666",
@@ -162,6 +182,10 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 24,
     marginTop: -10,
+  },
+  error: {
+    textAlign: "center",
+    color: "red",
   },
 });
 

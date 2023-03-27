@@ -1388,7 +1388,7 @@ const styles = StyleSheet.create({
   commentInput: {
     height: undefined,
     color: COLOR_8,
-    fontSize: 10,
+    fontSize: 14,
     fontFamily: "GothamProRegular",
   },
   select: {

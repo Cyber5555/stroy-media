@@ -49,12 +49,20 @@ function Messages(props) {
   const serachResult = useSelector(
     (state) => state.searchChatMembersSlice.data
   );
+  const success = useSelector((state) => state.searchChatMembersSlice.success);
   const searchMessages = serachResult;
   const { route, navigation } = props;
   const { currentPage } = route.params;
   const [compName, setCompName] = useState("");
   const [userName, setUserName] = useState("");
   const [deletedId, setDeletedId] = useState([]);
+
+  useEffect(() => {
+    console.log(success);
+    success && setVisibleModal(false);
+    success && setCompName("");
+    success && setUserName("");
+  }, [success]);
 
   useEffect(() => {
     AsyncStorage.getItem("token").then((result) => {

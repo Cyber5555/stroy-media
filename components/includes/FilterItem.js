@@ -27,7 +27,7 @@ function FilterItem(props) {
         style={styles.optionBlock}
       >
         <Text style={styles.option}>
-          {props.isCitys ? item?.title?.ru || item?.title : item}
+          {props?.isCitys ? item?.title?.ru || item?.title : item}
         </Text>
       </TouchableOpacity>
     );
@@ -44,7 +44,7 @@ function FilterItem(props) {
   };
 
   useEffect(() => {
-    searchValue && filtered(searchValue);
+    filtered(searchValue);
   }, [searchValue]);
   return (
     <View>
@@ -83,6 +83,7 @@ function FilterItem(props) {
               />
             </View>
           )}
+          {!citys.length && <Text style={styles.no_product}>Не найдено</Text>}
           <FlatList
             data={citys.length ? citys : []}
             renderItem={renderItem}
@@ -158,6 +159,10 @@ const styles = StyleSheet.create({
     color: COLOR_1,
     fontFamily: "GothamProMedium",
     fontSize: 12,
+  },
+  no_product: {
+    textAlign: "center",
+    marginTop: 50,
   },
 });
 
