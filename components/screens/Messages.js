@@ -164,6 +164,16 @@ function Messages(props) {
     setChanged(true);
   };
 
+  // useEffect(() => {
+  //   activeTab === "Диалоги" &&
+  //     searchValue === "" &&
+  //     dispatch(allDialogRequest({ token }));
+
+  //   activeTab === "Чаты" &&
+  //     searchValue === "" &&
+  //     dispatch(allChatForumRequest({ token }));
+  // }, [searchValue === ""]);
+
   const headerComponent = () => {
     return (
       <View style={styles.header}>
@@ -179,7 +189,12 @@ function Messages(props) {
           <Search
             style={styles.search}
             searchText={searchValue}
-            onSearchText={(val) => setSearchValue(val)}
+            onSearchText={(val) => {
+              console.log(val);
+              val == ""
+                ? setSearchValue("") && filteredMessages("")
+                : setSearchValue(val);
+            }}
             resetText={resetText}
           />
           <TouchableOpacity
