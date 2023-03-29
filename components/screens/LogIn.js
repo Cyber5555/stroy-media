@@ -16,6 +16,7 @@ import { ImageLogo } from "../helpers/images";
 import ForgotPasswordModal from "../includes/ForgotPasswordModal";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "../../store/reducers/loginSlice";
+import { forgotPasswordRequest } from "./../../store/reducers/forgotPasswordSlice";
 
 const Login = () => {
   const [login, setLogin] = useState("");
@@ -65,6 +66,7 @@ const Login = () => {
     if (!emailForNewPassword.includes("@gmail.com")) {
       setError("Неверный Эл. адрес");
     } else {
+      dispoatch(forgotPasswordRequest({ email: emailForNewPassword }));
       setShowForgotPasswordModal(false);
       setEmailForNewPassword("");
       setError("");

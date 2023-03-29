@@ -102,7 +102,7 @@ function Offers(props) {
   }, []);
   const filtered = () => {
     setCitys(
-      allCitys.filter((c) => {
+      allCitys?.filter((c) => {
         return c?.title?.ru?.includes(searchValue);
       })
     );
@@ -394,7 +394,7 @@ function Offers(props) {
       })
     )
       .unwrap()
-      .then((res) => setLikedList(res.data.data.isLike));
+      .then((res) => setLikedList(res?.data.data.isLike));
   };
 
   const previusPage = () => {
@@ -419,14 +419,14 @@ function Offers(props) {
       })
     )
       .unwrap()
-      .then((res) => setLikedList(res.data.data.isLike));
+      .then((res) => setLikedList(res?.data.data.isLike));
   };
 
   useEffect(() => {
     dispatch(allSuggestionRequest({ token, id: "Поиск КТК", offset }))
       .unwrap()
       .then((res) => {
-        setLikedList(res.data.data.isLike);
+        setLikedList(res?.data.data.isLike);
       });
   }, [token]);
 

@@ -58,7 +58,7 @@ function Participants(props) {
     dispatch(getMembersReques({ token, offset }))
       .unwrap()
       .then((res) => {
-        setLikedList(res.data.data.isLike);
+        setLikedList(res?.data.data.isLike);
       });
   }, [token, page]);
 

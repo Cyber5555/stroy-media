@@ -558,7 +558,7 @@ const MyProfile = ({ route, navigation }) => {
                 />
               </View>
               <View style={{ marginBottom: 60 }}>
-                {citys.length === 0 && (
+                {citys?.length === 0 && (
                   <Text style={styles.no_product}>Не найдено</Text>
                 )}
                 <FlatList
@@ -567,6 +567,7 @@ const MyProfile = ({ route, navigation }) => {
                   renderItem={renderItem}
                   maxToRenderPerBatch={10}
                   updateCellsBatchingPeriod={20}
+                  nestedScrollEnabled
                 />
               </View>
             </AccordionItem>
@@ -613,7 +614,7 @@ const MyProfile = ({ route, navigation }) => {
                 />
               </View>
               <View style={{ marginBottom: 60 }}>
-                {citys.length === 0 && (
+                {!citys?.length && (
                   <Text style={styles.no_product}>Не найдено</Text>
                 )}
                 <FlatList

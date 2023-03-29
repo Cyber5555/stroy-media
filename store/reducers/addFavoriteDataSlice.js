@@ -22,6 +22,7 @@ const addFavoriterSlice = createSlice({
     error: false,
     data: [],
   },
+
   reducers: {},
   extraReducers: {
     [addFavoriteRequest.pending]: (state) => {

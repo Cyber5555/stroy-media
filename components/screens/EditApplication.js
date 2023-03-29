@@ -25,7 +25,6 @@ import { showMessage } from "react-native-flash-message";
 import Modal from "react-native-modal";
 import DelayInput from "react-native-debounce-input";
 
-
 function EditApplication(props) {
   const { route, navigation } = props;
   const { currentPage, item, user, token } = route.params;
@@ -48,7 +47,7 @@ function EditApplication(props) {
 
   const filtered = (searchText) => {
     setCitys(
-      allCitys.filter((c) => {
+      allCitys?.filter((c) => {
         return c?.title?.ru?.includes(searchText);
       })
     );

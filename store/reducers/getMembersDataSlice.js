@@ -46,7 +46,7 @@ const getMembersSlice = createSlice({
       state.loading = true;
     },
     [getMembersReques.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.company;
+      state.data = action.payload.data?.data?.company;
       state.error = false;
     },
     [getMembersReques.rejected]: (state) => {

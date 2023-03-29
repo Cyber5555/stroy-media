@@ -37,7 +37,7 @@ function FilterItem(props) {
   }, [expanded]);
   const filtered = (searchText) => {
     setCitys(
-      allCitys.filter((c) => {
+      allCitys?.filter((c) => {
         return c?.title?.ru?.includes(searchText);
       })
     );
@@ -70,7 +70,7 @@ function FilterItem(props) {
         animationOutTiming={100}
         deviceHeight={350}
       >
-        <View style={[styles.showPart, props.offers && { top: 50 }]}>
+        <View style={[styles.showPart, props.offers && { top: 20 }]}>
           {props.isCitys && (
             <View style={styles.searchRow}>
               <DelayInput
@@ -83,9 +83,9 @@ function FilterItem(props) {
               />
             </View>
           )}
-          {!citys.length && <Text style={styles.no_product}>Не найдено</Text>}
+          {!citys?.length && <Text style={styles.no_product}>Не найдено</Text>}
           <FlatList
-            data={citys.length ? citys : []}
+            data={citys?.length ? citys : []}
             renderItem={renderItem}
             key={(item, index) => index.toString()}
           />
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: "center",
     alignItems: "center",
+    zIndex: 1,
   },
   searchRow: {
     flexDirection: "row",
@@ -148,9 +149,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLOR_1,
     borderRadius: 10,
-    borderTopWidth: 0,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
   },
   optionBlock: {
     marginBottom: 18,

@@ -84,9 +84,7 @@ function CreatingApplication(props) {
   const [searchValue, setSearchValue] = useState("");
   const [hash, setHash] = useState(null);
   const [loading, setLoading] = useState(false);
-  let allCitys = useSelector(
-    (state) => state.getCitysSlice?.data?.data?.data?.citys
-  );
+  let allCitys = useSelector((state) => state.getCitysSlice?.data?.data?.data?.citys);
   const DropDownRef = useRef({});
   const DrowDownTypeContainerRef = useRef({});
   //   const getFileSize = async (fileUri) => {
@@ -1311,7 +1309,7 @@ function CreatingApplication(props) {
 
   const filtered = (searchText) => {
     setCitys(
-      allCitys.filter((c) => {
+      allCitys?.filter((c) => {
         return c?.title?.ru?.includes(searchText);
       })
     );
