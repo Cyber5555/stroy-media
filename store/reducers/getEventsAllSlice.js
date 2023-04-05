@@ -23,17 +23,20 @@ const getEventsSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getEventsRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getEventsRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data;
-      state.loading = false;
-    },
-    [getEventsRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getEventsRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getEventsRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data;
+        state.loading = false;
+      })
+
+      .addCase(getEventsRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

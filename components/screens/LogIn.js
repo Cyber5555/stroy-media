@@ -16,7 +16,11 @@ import { ImageLogo } from "../helpers/images";
 import ForgotPasswordModal from "../includes/ForgotPasswordModal";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "../../store/reducers/loginSlice";
-import { forgotPasswordRequest } from "./../../store/reducers/forgotPasswordSlice";
+import {
+  changeAnswerForgotPassword,
+  forgotPasswordRequest,
+} from "./../../store/reducers/forgotPasswordSlice";
+import AnswerForgotPasswordModal from "../includes/AnswerForgotPasswordModal";
 
 const Login = () => {
   const [login, setLogin] = useState("");
@@ -29,8 +33,9 @@ const Login = () => {
   const [emailForNewPassword, setEmailForNewPassword] = useState("");
   const [errors, setError] = useState("");
   const state = useSelector((state) => state);
-  const dispoatch = useDispatch();
+  const dispatch = useDispatch();
   const { error, loading } = state.loginSlice;
+  const { success } = state.forgotPasswordSlice;
 
   const onLoginPress = () => {
     if (!login) {
@@ -46,9 +51,7 @@ const Login = () => {
       return;
     }
     if (password && login) {
-      dispoatch(
-        loginRequest({ login: login, password: password, auth: "api" })
-      );
+      dispatch(loginRequest({ login: login, password: password, auth: "api" }));
     }
   };
 
@@ -66,7 +69,7 @@ const Login = () => {
     if (!emailForNewPassword.includes("@gmail.com")) {
       setError("Неверный Эл. адрес");
     } else {
-      dispoatch(forgotPasswordRequest({ email: emailForNewPassword }));
+      dispatch(forgotPasswordRequest({ email: emailForNewPassword }));
       setShowForgotPasswordModal(false);
       setEmailForNewPassword("");
       setError("");
@@ -123,6 +126,12 @@ const Login = () => {
               setShowForgotPasswordModal(false);
               return setEmailForNewPassword("");
             }}
+          />
+          <AnswerForgotPasswordModal
+            onSubmit={() => {
+              dispatch(changeAnswerForgotPassword());
+            }}
+            isVisible={success}
           />
         </View>
       </View>

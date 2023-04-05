@@ -25,18 +25,22 @@ const membersSingleSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [membersSingleRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [membersSingleRequest.fulfilled]: (state, action) => {
-      state.data = action.payload?.data?.data?.company;
-      state.error = false;
-    },
-    [membersSingleRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(membersSingleRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(membersSingleRequest.fulfilled, (state, action) => {
+        state.data = action.payload?.data?.data?.company;
+        state.error = false;
+      })
+
+      .addCase(membersSingleRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

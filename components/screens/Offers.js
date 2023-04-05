@@ -135,7 +135,7 @@ function Offers(props) {
   const renderItem = ({ item, index }) => {
     return (
       <OfferItem
-        likedList={likedList[index]}
+        likedList={likedList}
         navigation={navigation}
         date={item?.date_create?.$date?.$numberLong}
         id={item.last_id}
@@ -341,9 +341,12 @@ function Offers(props) {
           />
           <FilterItem
             offers
+            isCitys={false}
             title={containerType ? containerType : "Тип контейнера"}
             options={typeContainer}
             onSelect={(option) => {
+              console.log(option);
+
               setTypeContainer(option);
               filterTypeContainer(option);
             }}
@@ -426,6 +429,7 @@ function Offers(props) {
     dispatch(allSuggestionRequest({ token, id: "Поиск КТК", offset }))
       .unwrap()
       .then((res) => {
+        console.log(res?.data.data.isLike,'res?.data.data.isLike');
         setLikedList(res?.data.data.isLike);
       });
   }, [token]);

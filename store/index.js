@@ -1,4 +1,8 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  combineReducers,
+  createImmutableStateInvariantMiddleware,
+} from "@reduxjs/toolkit";
 import loginSlice from "./reducers/loginSlice";
 import authUserSlice from "./reducers/authUserSlice";
 import getCitysSlice from "./reducers/getCitysSlice";
@@ -41,6 +45,7 @@ import searchChatMembersSlice from "./reducers/searchChatMembersSlice";
 import workRequestSlice from "./reducers/workRequestSlice";
 import editAplicationsSlice from "./reducers/editAplicationsSlice";
 import deleteChatSlice from "./reducers/deleteChatSlice";
+import forgotPasswordSlice from "./reducers/forgotPasswordSlice";
 const RootReducer = combineReducers({
   loginSlice,
   getCountrysSlice,
@@ -84,13 +89,23 @@ const RootReducer = combineReducers({
   workRequestSlice,
   editAplicationsSlice,
   deleteChatSlice,
+  forgotPasswordSlice,
 });
 
 const configureCustomStore = () => {
   const store = configureStore({
     reducer: RootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({ serializableCheck: false }),
+      getDefaultMiddleware({
+        immutableCheck: {
+          ignoredPaths: [
+            "ignoredPath",
+            "ignoredNested.one",
+            "ignoredNested.two",
+          ],
+        },
+        serializableCheck: false,
+      }),
   });
   return { store };
 };

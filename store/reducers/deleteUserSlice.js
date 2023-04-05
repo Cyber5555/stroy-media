@@ -22,17 +22,18 @@ const deletUserSlice = createSlice({
     data: "",
   },
   reducers: {},
-  extraReducers: {
-    [deleteUserRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [deleteUserRequest.fulfilled]: (state, action) => {
-      state.error = false;
-    },
-    [deleteUserRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(deleteUserRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteUserRequest.fulfilled, (state, action) => {
+        state.error = false;
+      })
+      .addCase(deleteUserRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

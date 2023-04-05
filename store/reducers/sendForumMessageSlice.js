@@ -8,7 +8,7 @@ export const sendForumMessageRequest = createAsyncThunk(
       const result = await api.post("/forum-send-message", data);
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -21,18 +21,21 @@ const sendForumMessageSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [sendForumMessageRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [sendForumMessageRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [sendForumMessageRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(sendForumMessageRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(sendForumMessageRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(sendForumMessageRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

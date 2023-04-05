@@ -19,17 +19,20 @@ const editUserSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [editUserDataRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [editUserDataRequest.fulfilled]: (state, action) => {
-      state.posts = action.payload;
-      state.loading = false;
-    },
-    [editUserDataRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(editUserDataRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(editUserDataRequest.fulfilled, (state, action) => {
+        state.posts = action.payload;
+        state.loading = false;
+      })
+
+      .addCase(editUserDataRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

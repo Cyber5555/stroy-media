@@ -12,7 +12,7 @@ export const getAnswerRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-     return error
+      return error;
     }
   }
 );
@@ -24,17 +24,20 @@ const getAnswerSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getAnswerRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAnswerRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.rows;
-      state.loading = false;
-    },
-    [getAnswerRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getAnswerRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAnswerRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data.rows;
+        state.loading = false;
+      })
+
+      .addCase(getAnswerRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

@@ -11,8 +11,8 @@ export const checkLiklyOfferRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-      return
-      return error
+      return;
+      return error;
     }
   }
 );
@@ -25,18 +25,20 @@ const checkLiklyOfferSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [checkLiklyOfferRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [checkLiklyOfferRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [checkLiklyOfferRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkLiklyOfferRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(checkLiklyOfferRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+      .addCase(checkLiklyOfferRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

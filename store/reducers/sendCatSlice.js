@@ -8,7 +8,7 @@ export const sendCatRequest = createAsyncThunk("sendCat", async (data) => {
     });
     return result;
   } catch (error) {
-    return error
+    return error;
   }
 });
 
@@ -20,18 +20,21 @@ const sendCatSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [sendCatRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [sendCatRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [sendCatRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(sendCatRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(sendCatRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(sendCatRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

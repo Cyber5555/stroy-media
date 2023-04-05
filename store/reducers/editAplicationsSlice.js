@@ -8,7 +8,7 @@ export const editAplicationsRequest = createAsyncThunk(
       const result = await api.post("/cat-serv-edit", data);
       return result;
     } catch (error) {
-     return error
+      return error;
     }
   }
 );
@@ -20,19 +20,20 @@ const editAplicationsRequestSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [editAplicationsRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [editAplicationsRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-      state.loading = false;
-    },
-    [editAplicationsRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(editAplicationsRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editAplicationsRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+        state.loading = false;
+      })
+      .addCase(editAplicationsRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

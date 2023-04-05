@@ -11,7 +11,7 @@ export const chatOrderRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -24,17 +24,18 @@ const orderChatSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [chatOrderRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [chatOrderRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data;
-      state.loading = false;
-    },
-    [chatOrderRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(chatOrderRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(chatOrderRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data;
+        state.loading = false;
+      })
+      .addCase(chatOrderRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

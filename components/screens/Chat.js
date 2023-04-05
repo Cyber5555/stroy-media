@@ -86,7 +86,7 @@ function Chat(props) {
       getImageFormat(result.assets[0].uri);
       setFileName(result.assets[0].uri.split("/").pop());
       setFilePath(result.assets[0].uri);
-      console.log(result);
+      // console.log(result);
     }
   };
   const sendMessage = () => {

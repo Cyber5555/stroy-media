@@ -25,17 +25,18 @@ const hideUserSlice = createSlice({
     hide: "",
   },
   reducers: {},
-  extraReducers: {
-    [hideUserRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [hideUserRequest.fulfilled]: (state) => {
-      state.error = false;
-    },
-    [hideUserRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(hideUserRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(hideUserRequest.fulfilled, (state) => {
+        state.error = false;
+      })
+      .addCase(hideUserRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

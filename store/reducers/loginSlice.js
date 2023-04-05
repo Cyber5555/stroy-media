@@ -29,24 +29,24 @@ const loginSlice = createSlice({
       AsyncStorage.removeItem("token").then((value) => value);
     },
   },
-  extraReducers: {
-    [loginRequest.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(loginRequest.pending, (state) => {
       state.loading = true;
-    },
-    [loginRequest.fulfilled]: (state, action) => {
-      const succes = action.payload + "";
-      if (succes.includes(422)) {
+    });
+    builder.addCase(loginRequest.fulfilled, (state, action) => {
+      const success = action.payload + "";
+      if (success.includes(422)) {
         state.token = "";
         state.loading = false;
         state.error = "неверный пароль или адрес электронной почты";
       } else {
         state.token = action.payload;
       }
-    },
-    [loginRequest.rejected]: (state) => {
+    });
+    builder.addCase(loginRequest.rejected, (state) => {
       state.error = true;
       state.loading = false;
-    },
+    });
   },
 });
 

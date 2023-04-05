@@ -41,18 +41,19 @@ const getMembersSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getMembersReques.pending]: (state) => {
-      state.loading = true;
-    },
-    [getMembersReques.fulfilled]: (state, action) => {
-      state.data = action.payload.data?.data?.company;
-      state.error = false;
-    },
-    [getMembersReques.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getMembersReques.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getMembersReques.fulfilled, (state, action) => {
+        state.data = action.payload.data?.data?.company;
+        state.error = false;
+      })
+      .addCase(getMembersReques.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

@@ -34,18 +34,19 @@ const allCatSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [allCatRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [allCatRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.aplications.aplications;
-      state.error = false;
-    },
-    [allCatRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(allCatRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(allCatRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data.aplications.aplications;
+        state.error = false;
+      })
+      .addCase(allCatRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

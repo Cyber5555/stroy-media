@@ -8,7 +8,7 @@ export const getAllPollsRequest = createAsyncThunk(
       const result = await api.post("/get-all-polls", { secret_token: token });
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -21,18 +21,21 @@ const getAllPollsSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getAllPollsRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAllPollsRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data?.data.rows;
-      state.error = false;
-    },
-    [getAllPollsRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllPollsRequest.pending, (state) => {
+        state.loading = true;
+      })
+      
+      .addCase(getAllPollsRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data?.data.rows;
+        state.error = false;
+      })
+
+      .addCase(getAllPollsRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

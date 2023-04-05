@@ -13,7 +13,7 @@ export const personalMessageRequest = createAsyncThunk(
         return res;
       })
       .catch((error) => {
-       return error
+        return error;
       });
   }
 );
@@ -26,17 +26,19 @@ const personalMessageSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [personalMessageRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [personalMessageRequest.fulfilled]: (state) => {
-      state.error = false;
-    },
-    [personalMessageRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(personalMessageRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(personalMessageRequest.fulfilled, (state) => {
+        state.error = false;
+      })
+      .addCase(personalMessageRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

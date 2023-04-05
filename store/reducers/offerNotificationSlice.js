@@ -13,7 +13,7 @@ export const offerlNotificationRequest = createAsyncThunk(
         return res;
       })
       .catch((error) => {
-       return error
+        return error;
       });
   }
 );
@@ -26,18 +26,22 @@ const offerlNotificationSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [offerlNotificationRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [offerlNotificationRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [offerlNotificationRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(offerlNotificationRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(offerlNotificationRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(offerlNotificationRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

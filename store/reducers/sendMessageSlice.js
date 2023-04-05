@@ -8,7 +8,7 @@ export const sendMessageRequest = createAsyncThunk(
       const result = await api.post("/chat-send-message", data);
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -21,18 +21,21 @@ const sendMessageSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [sendMessageRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [sendMessageRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [sendMessageRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(sendMessageRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(sendMessageRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(sendMessageRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

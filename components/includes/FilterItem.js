@@ -17,6 +17,12 @@ function FilterItem(props) {
     (state) => state.getCitysSlice?.data?.data?.data?.citys
   );
   const renderItem = ({ item }) => {
+    if (item?.title?.ru) {
+      item = item?.title?.ru;
+    } else if (item?.title) {
+      item = item?.title;
+    }
+
     return (
       <TouchableOpacity
         activeOpacity={0.7}
@@ -26,15 +32,14 @@ function FilterItem(props) {
         }}
         style={styles.optionBlock}
       >
-        <Text style={styles.option}>
-          {props?.isCitys ? item?.title?.ru || item?.title : item}
-        </Text>
+        <Text style={styles.option}>{item}</Text>
       </TouchableOpacity>
     );
   };
   useEffect(() => {
     setCitys(options);
   }, [expanded]);
+
   const filtered = (searchText) => {
     setCitys(
       allCitys?.filter((c) => {
@@ -46,6 +51,7 @@ function FilterItem(props) {
   useEffect(() => {
     filtered(searchValue);
   }, [searchValue]);
+
   return (
     <View>
       <TouchableOpacity
@@ -70,8 +76,8 @@ function FilterItem(props) {
         animationOutTiming={100}
         deviceHeight={350}
       >
-        <View style={[styles.showPart, props.offers && { top: 20 }]}>
-          {props.isCitys && (
+        <View style={[styles.showPart, props?.offers && { top: 20 }]}>
+          {props?.isCitys && (
             <View style={styles.searchRow}>
               <DelayInput
                 placeholder="Search"
@@ -84,6 +90,7 @@ function FilterItem(props) {
             </View>
           )}
           {!citys?.length && <Text style={styles.no_product}>Не найдено</Text>}
+
           <FlatList
             data={citys?.length ? citys : []}
             renderItem={renderItem}

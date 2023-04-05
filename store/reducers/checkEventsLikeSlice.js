@@ -11,7 +11,7 @@ export const checkEventsLikeRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-    return error
+      return error;
     }
   }
 );
@@ -24,18 +24,19 @@ const checkEventsLikeSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [checkEventsLikeRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [checkEventsLikeRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [checkEventsLikeRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkEventsLikeRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(checkEventsLikeRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+      .addCase(checkEventsLikeRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

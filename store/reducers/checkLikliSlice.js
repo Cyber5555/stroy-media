@@ -23,18 +23,19 @@ const checkLiklySlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [checkLiklyRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [checkLiklyRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [checkLiklyRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkLiklyRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(checkLiklyRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+      .addCase(checkLiklyRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

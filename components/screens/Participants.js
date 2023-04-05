@@ -58,7 +58,8 @@ function Participants(props) {
     dispatch(getMembersReques({ token, offset }))
       .unwrap()
       .then((res) => {
-        setLikedList(res?.data.data.isLike);
+        // console.log(res?.data?.data.company[0].likes, "resssssssssssssss");
+        setLikedList(res?.data?.data.company[0].likes);
       });
   }, [token, page]);
 
@@ -108,6 +109,8 @@ function Participants(props) {
     );
   };
 
+
+
   return (
     <Wrapper
       withContainer
@@ -130,12 +133,20 @@ function Participants(props) {
           <Search
             style={styles.search}
             searchText={searchValue}
-            onSearchText={(val) => setSearchValue(val)}
+            onSearchText={(val) => {
+              val === "" && resetFiltered();
+              setSearchValue(val);
+            }}
             resetText={resetText}
           />
           <TouchableOpacity
             activeOpacity={0.2}
-            onPress={() => filtered(cityId, role, searchValue)}
+            onPress={() => {
+              // console.log(cityId, "cityId");
+              // console.log(role, "role");
+              // console.log(searchValue, "searchValue");
+              filtered(cityId, role, searchValue);
+            }}
           >
             <Image source={SearchIcon} style={{ width: 25, height: 25 }} />
           </TouchableOpacity>
@@ -144,6 +155,7 @@ function Participants(props) {
           {activeTab === "Все" ? (
             <>
               <FilterItem
+                isCitys={false}
                 title={role ? role : "Профиль деятельности"}
                 options={[
                   "Собственник КТК",
@@ -154,7 +166,6 @@ function Participants(props) {
                   "Другое",
                 ]}
                 onSelect={(option) => {
-                  console.log(option);
                   setRole(option);
                   filtered(cityId, option, searchValue);
                 }}
@@ -187,6 +198,7 @@ function Participants(props) {
           return <Text style={styles.empty}>ничего не найдено</Text>;
         }}
         renderItem={({ item, index }) => {
+          console.log(index);
           return (
             <View
               style={{
@@ -196,7 +208,7 @@ function Participants(props) {
               }}
             >
               <ParticipantItem
-                likedList={likedList[index]}
+                likedList={likedList}
                 favorites={activeTab}
                 imageUri={`https://teus.online/${item?.avatar}`}
                 companyName={item?.name || item?.contact_person}

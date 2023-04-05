@@ -57,19 +57,23 @@ const allSuggestionsSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [allSuggestionRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [allSuggestionRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data?.data.rows;
-      state.error = false;
-      state.loading = false;
-    },
-    [allSuggestionRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(allSuggestionRequest.pending, (state) => {
+        state.loading = true;
+      })
+      
+      .addCase(allSuggestionRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data?.data.rows;
+        state.error = false;
+        state.loading = false;
+      })
+
+      .addCase(allSuggestionRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

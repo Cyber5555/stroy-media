@@ -45,7 +45,7 @@ const HomeMainButtons = (props) => {
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
-          dispatch(getMembersReques({token}))
+          dispatch(getMembersReques({ token }))
             .unwrap()
             .then(() => {
               navigation.navigate("Participants", { currentPage: "Участники" });
@@ -93,7 +93,7 @@ const HomeMainButtons = (props) => {
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
-          dispatch(allCatRequest({ token, tab: "В работе"}))
+          dispatch(allCatRequest({ token, tab: "В работе" }))
             .unwrap()
             .then(() => {
               return navigation.navigate("MyApplications", {

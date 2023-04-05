@@ -26,17 +26,19 @@ const globallMessageSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [globallMessageRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [globallMessageRequest.fulfilled]: (state) => {
-      state.error = false;
-    },
-    [globallMessageRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(globallMessageRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(globallMessageRequest.fulfilled, (state) => {
+        state.error = false;
+      })
+      .addCase(globallMessageRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

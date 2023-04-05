@@ -8,7 +8,7 @@ export const getHelpsQueryRequest = createAsyncThunk(
       const result = await api.post("/get-helps-data");
       return result;
     } catch (error) {
-     return error
+      return error;
     }
   }
 );
@@ -20,17 +20,21 @@ const getHelpsSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getHelpsQueryRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getHelpsQueryRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.posts.rows;
-      state.loading = false;
-    },
-    [getHelpsQueryRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getHelpsQueryRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(getHelpsQueryRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data.posts.rows;
+        state.loading = false;
+      })
+
+      .addCase(getHelpsQueryRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

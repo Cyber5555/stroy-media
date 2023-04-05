@@ -437,7 +437,7 @@ const MyProfile = ({ route, navigation }) => {
   const filtered = (searchText) => {
     setQuery(true);
     setCitys(
-      allCitys.filter((c) => {
+      allCitys?.filter((c) => {
         return c?.title?.ru?.includes(searchText);
       })
     );
@@ -449,6 +449,15 @@ const MyProfile = ({ route, navigation }) => {
   useEffect(() => {
     filtered(searchValue);
   }, [searchValue]);
+
+  // let phoneRegex = /^(?:\+1)?[^\d]*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4})/g;
+  // const phoneRegex = /[^0-9]/g;
+
+  const handleChangePhoneNumber = (e) => {
+    const regex = /^\+7\s\d{3}\s\d{3}-\d{2}-\d{2}$/g;
+    setPhoneNumber(e.replace(regex));
+  };
+
   return (
     <Wrapper
       withScrollView
@@ -504,7 +513,7 @@ const MyProfile = ({ route, navigation }) => {
             numberTel={true}
             phoneNumber={phoneNumber}
             placeholder={user?.phone}
-            onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
+            onChangeText={handleChangePhoneNumber}
             keyboardType={"phone-pad"}
           />
           <BlockWithSwitchButton
@@ -695,6 +704,8 @@ const MyProfile = ({ route, navigation }) => {
               submitButtonColor="#CCC"
               submitButtonText="Submit"
               IconRenderer={MaterialIcons}
+              searchPlaceholderText="Поиск категории"
+              confirmText="Применить"
               icons={{
                 search: {
                   name: "search",

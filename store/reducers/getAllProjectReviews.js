@@ -12,7 +12,7 @@ export const getProjectReviewsRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-    return error
+      return error;
     }
   }
 );
@@ -25,18 +25,22 @@ const getAllProjectReviewsSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getProjectReviewsRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getProjectReviewsRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data;
-      state.error = false;
-    },
-    [getProjectReviewsRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getProjectReviewsRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(getProjectReviewsRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data;
+        state.error = false;
+      })
+
+      .addCase(getProjectReviewsRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

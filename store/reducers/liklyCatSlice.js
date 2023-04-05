@@ -11,7 +11,7 @@ export const getLiklyCatRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -24,17 +24,21 @@ const getLiklyCatSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getLiklyCatRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getLiklyCatRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    },
-    [getLiklyCatRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getLiklyCatRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(getLiklyCatRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = false;
+      })
+
+      .addCase(getLiklyCatRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

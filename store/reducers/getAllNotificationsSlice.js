@@ -8,7 +8,7 @@ export const getAllnotificationsRequest = createAsyncThunk(
       const result = await api.post("/get-notify-all", { secret_token: token });
       return result;
     } catch (error) {
-     return error
+      return error;
     }
   }
 );
@@ -21,18 +21,22 @@ const getAllNotificationsSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getAllnotificationsRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAllnotificationsRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data?.data?.rows;
-      state.error = false;
-    },
-    [getAllnotificationsRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getAllnotificationsRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(getAllnotificationsRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data?.data?.rows;
+        state.error = false;
+      })
+
+      .addCase(getAllnotificationsRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

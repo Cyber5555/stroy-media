@@ -17,19 +17,22 @@ const workRequestSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [workRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [workRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-      state.loading = false;
-    },
-    [workRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(workRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(workRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+        state.loading = false;
+      })
+
+      .addCase(workRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

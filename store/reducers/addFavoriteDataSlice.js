@@ -24,18 +24,19 @@ const addFavoriterSlice = createSlice({
   },
 
   reducers: {},
-  extraReducers: {
-    [addFavoriteRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [addFavoriteRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [addFavoriteRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addFavoriteRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addFavoriteRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+      .addCase(addFavoriteRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

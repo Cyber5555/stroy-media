@@ -41,6 +41,7 @@ export function OfferItem(props) {
   }, [token]);
 
   useEffect(() => {
+    console.log(likedList);
     if (likedList === "is_Favorite") {
       setLiked(true);
     } else {

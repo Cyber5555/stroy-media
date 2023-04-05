@@ -11,7 +11,7 @@ export const chatForumOrderRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -24,17 +24,21 @@ const orderChatForumSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [chatForumOrderRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [chatForumOrderRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data;
-      state.loading = false;
-    },
-    [chatForumOrderRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(chatForumOrderRequest.pending, (state) => {
+        state.loading = true;
+      })
+      
+      .addCase(chatForumOrderRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data;
+        state.loading = false;
+      })
+
+      .addCase(chatForumOrderRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

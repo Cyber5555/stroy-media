@@ -190,7 +190,6 @@ function Messages(props) {
             style={styles.search}
             searchText={searchValue}
             onSearchText={(val) => {
-              console.log(val);
               val == ""
                 ? setSearchValue("") && filteredMessages("")
                 : setSearchValue(val);

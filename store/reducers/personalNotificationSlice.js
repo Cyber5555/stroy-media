@@ -15,7 +15,7 @@ export const personalNotificationRequest = createAsyncThunk(
         return res;
       })
       .catch((error) => {
-       return error
+        return error;
       });
   }
 );
@@ -28,18 +28,21 @@ const personalNotificationSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [personalNotificationRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [personalNotificationRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [personalNotificationRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(personalNotificationRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(personalNotificationRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(personalNotificationRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

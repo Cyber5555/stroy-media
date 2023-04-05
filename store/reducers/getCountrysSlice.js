@@ -17,17 +17,21 @@ const getCountrySlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getCountrys.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getCountrys.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    },
-    [getCountrys.rejected]: (state, action) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(getCountrys.pending, (state, action) => {
+        state.loading = true;
+      })
+      
+      .addCase(getCountrys.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = false;
+      })
+
+      .addCase(getCountrys.rejected, (state, action) => {
+        state.loading = false;
+      });
   },
 });
 

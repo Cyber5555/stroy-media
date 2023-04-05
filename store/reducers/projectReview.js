@@ -13,7 +13,7 @@ export const projectReviewRequest = createAsyncThunk(
       });
       return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 );
@@ -26,18 +26,21 @@ const projectReviewSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [projectReviewRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [projectReviewRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [projectReviewRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(projectReviewRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(projectReviewRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(projectReviewRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

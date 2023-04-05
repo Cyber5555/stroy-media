@@ -13,7 +13,7 @@ export const globallNotificationRequest = createAsyncThunk(
         return res;
       })
       .catch((error) => {
-        return error
+        return error;
       });
   }
 );
@@ -26,18 +26,21 @@ const globallNotificationSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [globallNotificationRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [globallNotificationRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [globallNotificationRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(globallNotificationRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(globallNotificationRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(globallNotificationRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

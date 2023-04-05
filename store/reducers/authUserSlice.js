@@ -7,7 +7,7 @@ export const authRequest = createAsyncThunk("authUser", async ({ token }) => {
     const result = await api.post("/get-auth-data", { secret_token: token });
     return result;
   } catch (error) {
-    return error
+    return error;
   }
 });
 
@@ -19,17 +19,18 @@ const authSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [authRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [authRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data;
-      state.loading = false;
-    },
-    [authRequest.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(authRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(authRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data;
+        state.loading = false;
+      })
+      .addCase(authRequest.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

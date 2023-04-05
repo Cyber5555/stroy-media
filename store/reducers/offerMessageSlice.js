@@ -13,7 +13,7 @@ export const offerMessageRequest = createAsyncThunk(
         return res;
       })
       .catch((error) => {
-       return error
+        return error;
       });
   }
 );
@@ -26,18 +26,22 @@ const offerMessageSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [offerMessageRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [offerMessageRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.error = false;
-    },
-    [offerMessageRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(offerMessageRequest.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(offerMessageRequest.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.error = false;
+      })
+
+      .addCase(offerMessageRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

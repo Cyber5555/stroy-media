@@ -32,19 +32,23 @@ const allChatForumSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [allChatForumRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [allChatForumRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.contacts;
-      state.error = false;
-      state.loading = false;
-    },
-    [allChatForumRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(allChatForumRequest.pending, (state) => {
+        state.loading = true;
+      })
+      
+      .addCase(allChatForumRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data.contacts;
+        state.error = false;
+        state.loading = false;
+      })
+
+      .addCase(allChatForumRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

@@ -32,19 +32,20 @@ const allDialogSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [allDialogRequest.pending]: (state) => {
-      state.loading = true;
-    },
-    [allDialogRequest.fulfilled]: (state, action) => {
-      state.data = action.payload.data.data.users;
-      state.error = false;
-      state.loading = false;
-    },
-    [allDialogRequest.rejected]: (state) => {
-      state.error = true;
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(allDialogRequest.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(allDialogRequest.fulfilled, (state, action) => {
+        state.data = action.payload.data.data.users;
+        state.error = false;
+        state.loading = false;
+      })
+      .addCase(allDialogRequest.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
+      });
   },
 });
 

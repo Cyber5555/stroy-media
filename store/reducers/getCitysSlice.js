@@ -28,17 +28,18 @@ const getCitysSlice = createSlice({
     data: [],
   },
   reducers: {},
-  extraReducers: {
-    [getCitys.pending]: (state) => {
-      state.loading = true;
-    },
-    [getCitys.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    },
-    [getCitys.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCitys.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getCitys.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = false;
+      })
+      .addCase(getCitys.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 
