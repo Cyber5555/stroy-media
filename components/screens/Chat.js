@@ -40,7 +40,7 @@ const SearchIcon = require("../../assets/search.png");
 const HEIGHT = Dimensions.get("window").width;
 const ITEM_HEIGHT = 100;
 
-function Chat(props) {
+function Chat({ navigation, route }) {
   const messagesRef = useRef(null);
   const [searchValue, setSearchValue] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -48,7 +48,7 @@ function Chat(props) {
   const [inputHeight, setInputHeight] = useState(40);
   const user = useSelector((state) => state.authUserSlice.data.user);
   const dispatch = useDispatch();
-  const { navigation, route } = props;
+
   const { currentPage } = route.params;
   const [id, setId] = useState();
   const [token, setToken] = useState();
@@ -86,7 +86,6 @@ function Chat(props) {
       getImageFormat(result.assets[0].uri);
       setFileName(result.assets[0].uri.split("/").pop());
       setFilePath(result.assets[0].uri);
-      // console.log(result);
     }
   };
   const sendMessage = () => {
@@ -383,18 +382,27 @@ function Chat(props) {
           stickyHeaderIndices={[0]}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.last_id}
+          ListEmptyComponent={() => (
+            <View>
+              <Text>У Вас нет сообщений</Text>
+            </View>
+          )}
           onContentSizeChange={() => {
             (messages?.length || forumMessage?.length) &&
               messagesRef?.current?.scrollToEnd(0);
           }}
           getItemLayout={(data, index) => {
-            return { length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index };
+            return {
+              length: ITEM_HEIGHT,
+              offset: ITEM_HEIGHT * index + 100,
+              index,
+            };
           }}
         />
         {footerComponent()}
       </View>
 
-      <ImagesViewhModal
+      {/* <ImagesViewhModal
         isVisible={selectedFile ? true : false}
         fileName={selectedFile}
         item={dialogMessage}
@@ -402,7 +410,7 @@ function Chat(props) {
         onCancel={() => {
           setSelectedFile("");
         }}
-      />
+      /> */}
     </Wrapper>
   );
 }
@@ -429,10 +437,12 @@ const styles = StyleSheet.create({
   },
   listWrapper: {
     // flex: 1,
+    height: "100%",
     // width: "100%",
     // height:
     //   Dimensions.get("window").height - Platform.OS === "ios" ? -120 : -100,
     paddingBottom: 80,
+    backgroundColor: "red",
   },
   item: {
     marginBottom: 20,
@@ -449,7 +459,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 9999,
     height: 60,
-    bottom: 20,
     backgroundColor: "white",
   },
   inputView: {

@@ -121,7 +121,7 @@ function SendOffer(props) {
           </View>
         </View>
         <Text style={styles.header}>Контакты</Text>
-        <View style={styles.contactsList} >
+        <View style={styles.contactsList}>
           <SingleParticipantBlock
             key={item.last_id}
             uri={
@@ -184,12 +184,6 @@ function SendOffer(props) {
         />
         <View style={styles.containerStyle}>
           <SelectDropdown
-            searchInputStyle={{
-              borderColor: "black",
-              borderWidth: 0.2,
-              marginVertical: 10,
-              height: 40,
-            }}
             onSelect={() => {}}
             defaultButtonText="Валюта"
             dropdownIconPosition="right"
@@ -204,7 +198,7 @@ function SendOffer(props) {
               textAlign: "left",
             }}
             buttonStyle={{ height: 40, width: "100%", borderRadius: 8 }}
-            search
+            // search
             data={valuta}
             rowStyle={{
               flex: 1,
@@ -277,7 +271,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     backgroundColor: COLOR_10,
     borderRadius: 6,
-    height: 46,
+    // height: 46,
     borderTopColor: "transparent",
     borderTopWidth: 1,
   },

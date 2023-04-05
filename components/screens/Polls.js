@@ -9,11 +9,12 @@ import { useSelector } from "react-redux";
 import { getAllPollsRequest } from "../../store/reducers/getAllPolsSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function Polls(props) {
+function Polls({ route, navigation }) {
   const { data } = useSelector((state) => state.getAllPolsSlice);
-  const { route, navigation } = props;
+
   const { currentPage } = route.params;
   const dispatch = useDispatch();
+
   useEffect(() => {
     AsyncStorage.getItem("token").then((result) => {
       if (result) {

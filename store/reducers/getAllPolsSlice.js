@@ -26,7 +26,7 @@ const getAllPollsSlice = createSlice({
       .addCase(getAllPollsRequest.pending, (state) => {
         state.loading = true;
       })
-      
+
       .addCase(getAllPollsRequest.fulfilled, (state, action) => {
         state.data = action.payload.data?.data.rows;
         state.error = false;

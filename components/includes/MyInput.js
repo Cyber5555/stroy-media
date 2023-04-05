@@ -68,7 +68,7 @@ function MyInput({
           { borderColor: isActive && !textarea ? COLOR_9 : COLOR_6 },
           showEye && { paddingRight: 50 },
           style,
-          textarea && [styles.input, { height: 125 }],
+          textarea && [styles.input, { height: 125, verticalAlign: "top" }],
           isGray && [styles.input, { backgroundColor: "#EEEEEE" }],
           numberTel && [styles.input, { letterSpacing: 2 }],
         ]}

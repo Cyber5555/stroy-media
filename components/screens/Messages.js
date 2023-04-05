@@ -58,7 +58,6 @@ function Messages(props) {
   const [deletedId, setDeletedId] = useState([]);
 
   useEffect(() => {
-    console.log(success);
     success && setVisibleModal(false);
     success && setCompName("");
     success && setUserName("");

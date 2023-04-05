@@ -26,6 +26,7 @@ const sendCatSlice = createSlice({
       .addCase(sendCatRequest.pending, (state) => {
         state.loading = true;
       })
+      
       .addCase(sendCatRequest.fulfilled, (state, action) => {
         state.data = action.payload;
         state.error = false;

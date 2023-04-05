@@ -18,15 +18,19 @@ function FilterItem(props) {
   );
   const renderItem = ({ item }) => {
     if (item?.title?.ru) {
-      item = item?.title?.ru;
+      item = item.title.ru;
     } else if (item?.title) {
       item = item?.title;
+    } else if (item) {
+      item = item;
     }
 
     return (
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
+          console.log(item);
+          // return false;
           setExpanded(false);
           onSelect(item);
         }}

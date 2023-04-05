@@ -9,7 +9,6 @@ export const membersSingleRequest = createAsyncThunk(
         secret_token: token,
         company_id: id,
       });
-      console.log(result);
       return result;
     } catch (error) {
       return error;

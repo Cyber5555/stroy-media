@@ -124,7 +124,6 @@ const MyProfile = ({ route, navigation }) => {
   }
 
   const openCitysModal = () => {
-    console.log(isOpenCitys);
     setIsOpenCitys(!isOpenCitys);
     setSearchValue("");
   };
@@ -149,7 +148,6 @@ const MyProfile = ({ route, navigation }) => {
       aspect: [1, 1],
       quality: 0,
     });
-    console.log(await getFileInfo(result.assets[0].uri));
     if (!result.canceled) {
       setFileSize(await getFileInfo(result.assets[0].uri));
       setImage(result);
@@ -206,7 +204,6 @@ const MyProfile = ({ route, navigation }) => {
       name: new Date().toISOString(),
       type: `image/jpeg`,
     };
-    console.log;
     image?.uri && data.append("avatar_person", avatar_person);
     data.append("secret_token", token);
     data.append("post", position ? position : user?.post);

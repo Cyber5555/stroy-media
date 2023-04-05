@@ -327,11 +327,7 @@ function Offers(props) {
           <FilterItem
             isCitys
             offers
-            title={
-              cityFromName
-                ? cityFromName.title.ru || cityFromName.title
-                : "Откуда"
-            }
+            title={cityFromName ? cityFromName : "Откуда"}
             options={citys}
             top={274}
             onSelect={(option) => {
@@ -345,8 +341,6 @@ function Offers(props) {
             title={containerType ? containerType : "Тип контейнера"}
             options={typeContainer}
             onSelect={(option) => {
-              console.log(option);
-
               setTypeContainer(option);
               filterTypeContainer(option);
             }}
@@ -359,9 +353,7 @@ function Offers(props) {
               setToCityName(option);
               filterToCitys(option.last_id);
             }}
-            title={
-              cityToName ? cityToName.title.ru || cityToName.title : "Куда"
-            }
+            title={cityToName ? cityToName : "Куда"}
             options={citys}
             top={274}
           />
@@ -429,7 +421,7 @@ function Offers(props) {
     dispatch(allSuggestionRequest({ token, id: "Поиск КТК", offset }))
       .unwrap()
       .then((res) => {
-        console.log(res?.data.data.isLike,'res?.data.data.isLike');
+        // console.log(res?.data.data.isLike,'res?.data.data.isLike');
         setLikedList(res?.data.data.isLike);
       });
   }, [token]);

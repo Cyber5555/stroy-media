@@ -29,10 +29,10 @@ import { useFocusEffect } from "@react-navigation/native";
 import { authRequest } from "../../store/reducers/authUserSlice";
 import { Entypo } from "@expo/vector-icons";
 const SearchIcon = require("../../assets/search.png");
-function MyApplications(props) {
+
+function MyApplications({ route, navigation }) {
   const [activeTab, setActiveTab] = useState("В работе");
   const [searchValue, setSearchValue] = useState("");
-  const { route, navigation } = props;
   const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(5);
   const { currentPage } = route.params;
@@ -44,6 +44,7 @@ function MyApplications(props) {
   const [filteredData, setFilteredData] = useState([]);
   const [isFiltred, setIsFiltred] = useState(false);
   const timeStamnp = +data[0]?.date_create?.$date.$numberLong;
+
   useEffect(() => {
     AsyncStorage.getItem("token").then((result) => {
       if (result) {
@@ -52,11 +53,13 @@ function MyApplications(props) {
       }
     });
   }, []);
+
   useFocusEffect(
     useCallback(() => {
-      dispatch(allCatRequest({ token, tab: activeTab }));
+      dispatch(allCatRequest({ token, tab: activeTab, offset }));
     }, [token, activeTab])
   );
+
   const renderItem = ({ item, index }) => {
     return (
       <View style={styles.item}>
@@ -118,6 +121,7 @@ function MyApplications(props) {
       </View>
     );
   };
+
   const filtered = (searchText) => {
     setIsFiltred(true);
     setFilteredData(
@@ -289,7 +293,7 @@ function MyApplications(props) {
             activeTab={activeTab}
             onPress={(tab) => {
               setActiveTab(tab);
-              dispatch(allCatRequest({ token, tab }));
+              dispatch(allCatRequest({ token, tab, offset }));
             }}
           />
           <View style={styles.blankTextBlock}>

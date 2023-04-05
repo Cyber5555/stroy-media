@@ -76,6 +76,7 @@ function LeaveReviewModal(props) {
             lineHeight: 20,
             color: COLOR_1,
             fontFamily: "GothamProMedium",
+            justifyContent: "flex-start",
           }}
         />
         <MyButton

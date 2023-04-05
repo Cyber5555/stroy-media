@@ -84,7 +84,9 @@ function CreatingApplication(props) {
   const [searchValue, setSearchValue] = useState("");
   const [hash, setHash] = useState(null);
   const [loading, setLoading] = useState(false);
-  let allCitys = useSelector((state) => state.getCitysSlice?.data?.data?.data?.citys);
+  let allCitys = useSelector(
+    (state) => state.getCitysSlice?.data?.data?.data?.citys
+  );
   const DropDownRef = useRef({});
   const DrowDownTypeContainerRef = useRef({});
   //   const getFileSize = async (fileUri) => {
@@ -452,12 +454,6 @@ function CreatingApplication(props) {
         />
         <View style={styles.containerStyle}>
           <SelectDropdown
-            searchInputStyle={{
-              borderColor: "black",
-              borderWidth: 0.2,
-              marginVertical: 10,
-              height: 40,
-            }}
             ref={DropDownRef}
             defaultButtonText="Валюта"
             dropdownIconPosition="right"
@@ -472,7 +468,6 @@ function CreatingApplication(props) {
               textAlign: "left",
             }}
             buttonStyle={{ height: 40, width: "100%", borderRadius: 8 }}
-            search
             data={valuta}
             onSelect={(selectedItem, index) => {
               setCurrency(index);
@@ -547,12 +542,6 @@ function CreatingApplication(props) {
         />
         <View style={styles.containerStyle}>
           <SelectDropdown
-            searchInputStyle={{
-              borderColor: "black",
-              borderWidth: 0.2,
-              marginVertical: 10,
-              height: 40,
-            }}
             ref={DropDownRef}
             dropdownIconPosition="right"
             renderDropdownIcon={() => {
@@ -567,7 +556,6 @@ function CreatingApplication(props) {
               textAlign: "left",
             }}
             buttonStyle={{ height: 40, width: "100%", borderRadius: 8 }}
-            search
             data={valuta}
             onSelect={(selectedItem, index) => {
               setCurrency(index);
@@ -606,6 +594,7 @@ function CreatingApplication(props) {
             />
           </View>
           <FlatList
+            nestedScrollEnabled
             data={citys}
             keyExtractor={(item) => item.last_id}
             renderItem={({ item }) => {
@@ -921,12 +910,6 @@ function CreatingApplication(props) {
         />
         <View style={styles.containerStyle}>
           <SelectDropdown
-            searchInputStyle={{
-              borderColor: "black",
-              borderWidth: 0.2,
-              marginVertical: 10,
-              height: 40,
-            }}
             ref={DropDownRef}
             renderDropdownIcon={() => {
               return (
@@ -941,7 +924,6 @@ function CreatingApplication(props) {
               textAlign: "left",
             }}
             buttonStyle={{ height: 40, width: "100%", borderRadius: 8 }}
-            search
             data={valuta}
             onSelect={(selectedItem, index) => {
               setCurrency(index);
@@ -1110,12 +1092,6 @@ function CreatingApplication(props) {
         />
         <View style={styles.containerStyle}>
           <SelectDropdown
-            searchInputStyle={{
-              borderColor: "black",
-              borderWidth: 0.2,
-              marginVertical: 10,
-              height: 40,
-            }}
             ref={DropDownRef}
             defaultButtonText="Валюта"
             dropdownIconPosition="right"
@@ -1130,7 +1106,6 @@ function CreatingApplication(props) {
               textAlign: "left",
             }}
             buttonStyle={{ height: 40, width: "100%", borderRadius: 8 }}
-            search
             data={valuta}
             onSelect={(selectedItem, index) => {
               setCurrency(index);

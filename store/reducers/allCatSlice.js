@@ -11,7 +11,6 @@ export const allCatRequest = createAsyncThunk(
         type_request: tab === "В работе" ? "onwork" : "draft",
         offset,
       });
-
       return result;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -42,6 +41,10 @@ const allCatSlice = createSlice({
       .addCase(allCatRequest.fulfilled, (state, action) => {
         state.data = action.payload.data.data.aplications.aplications;
         state.error = false;
+        // console.log(
+        //   action.payload.data.data.aplications.aplications,
+        //   "state.data"
+        // );
       })
       .addCase(allCatRequest.rejected, (state) => {
         state.error = true;

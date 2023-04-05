@@ -109,8 +109,6 @@ function Participants(props) {
     );
   };
 
-
-
   return (
     <Wrapper
       withContainer
@@ -142,9 +140,6 @@ function Participants(props) {
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={() => {
-              // console.log(cityId, "cityId");
-              // console.log(role, "role");
-              // console.log(searchValue, "searchValue");
               filtered(cityId, role, searchValue);
             }}
           >
@@ -177,8 +172,8 @@ function Participants(props) {
                 options={citys}
                 onSelect={(option) => {
                   setCityId(option?.last_id);
-                  filtered(option?.last_id, role, searchValue);
-                  setCityName(option?.title.ru || option?.title);
+                  filtered(option, role, searchValue);
+                  setCityName(option);
                 }}
                 top={10}
               />
@@ -198,7 +193,6 @@ function Participants(props) {
           return <Text style={styles.empty}>ничего не найдено</Text>;
         }}
         renderItem={({ item, index }) => {
-          console.log(index);
           return (
             <View
               style={{

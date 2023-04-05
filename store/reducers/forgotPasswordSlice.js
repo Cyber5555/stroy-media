@@ -4,11 +4,9 @@ import { api } from "../../Api";
 export const forgotPasswordRequest = createAsyncThunk(
   "forgotPassword",
   async ({ email }) => {
-    console.log(email, "email");
     await api
       .post("/user-lost-start", { email: email })
       .then((result) => {
-        console.log(result.data);
         return result;
       })
       .catch((error) => {
