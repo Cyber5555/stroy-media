@@ -154,8 +154,12 @@ function MyApplications({ route, navigation }) {
           <View style={{ flex: 1 }}>
             <Search
               style={styles.search}
+              keyboardType={"web-search"}
               searchText={searchValue}
-              onSearchText={(val) => setSearchValue(val)}
+              onSearchText={(val) => {
+                val === "" && resetText();
+                setSearchValue(val);
+              }}
               resetText={resetText}
             />
           </View>
@@ -215,7 +219,7 @@ function MyApplications({ route, navigation }) {
               return <Text style={styles.empty}>ничего не найдено</Text>;
             }}
             ListFooterComponent={() => {
-              return data.length && activeTab !== "Избранное" ? (
+              return data.length === 5 && activeTab !== "Избранное" ? (
                 <View
                   style={{
                     flex: 1,
@@ -250,7 +254,7 @@ function MyApplications({ route, navigation }) {
               ) : null;
             }}
             renderItem={renderItem}
-            ListHeaderComponent={() => headerComponent()}
+            ListHeaderComponent={headerComponent()}
             renderHiddenItem={({ item }) => (
               <View style={styles.hiddenWrapper}>
                 <TouchableOpacity
@@ -307,6 +311,7 @@ function MyApplications({ route, navigation }) {
         </View>
       )}
       <AddNew
+        end={true}
         onPress={() =>
           navigation.navigate("CreatingApplication", {
             currentPage: "Создание новой заявки",

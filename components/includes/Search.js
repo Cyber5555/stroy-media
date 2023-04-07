@@ -5,7 +5,8 @@ import MyInput from "./MyInput";
 import { ImageSearch } from "../helpers/images";
 
 function Search(props) {
-  const { style, searchText, onSearchText, resetText, value } = props;
+  const { style, searchText, onSearchText, resetText, value, keyboardType } =
+    props;
   return (
     <View style={[styles.wrapper, style]}>
       <MyInput
@@ -14,6 +15,7 @@ function Search(props) {
         style={styles.input}
         filtered={searchText ? true : false}
         resetText={resetText}
+        keyboardType={keyboardType}
       />
     </View>
   );

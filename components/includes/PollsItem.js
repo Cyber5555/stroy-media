@@ -24,14 +24,28 @@ function PollsItem(props) {
   }, []);
 
   const checked = (item) => {
-    setCheckedList(item.id);
+    console.log(item.id);
+    setCheckedList(item?.id);
   };
 
   const submit = () => {
-    dispatch(getAnswerRequest({ token: token, id: id, answer: checkedList }))
-      .unwrap()
-      .catch(() => showMessage({ message: "Вы уже ответили на этот вопрос", type: "info" }));
-    setSubmitted(true);
+    console.log(checkedList, "lissssssssstttttttttttttttt");
+    checkedList
+      ? dispatch(
+          getAnswerRequest({ token: token, id: id, answer: checkedList })
+        )
+          .unwrap()
+          .then(setSubmitted(true))
+          .catch(() =>
+            showMessage({
+              message: "Ваш ответ был отправлен",
+              type: "info",
+            })
+          )
+      : showMessage({
+          message: "Выберите один из ответов",
+          type: "danger",
+        });
   };
 
   return submitted ? (

@@ -229,7 +229,7 @@ function SendOffer(props) {
             )
               .unwrap()
               .then((res) => {
-                if (res) {
+                if (!res) {
                   navigation.goBack();
                 } else {
                   showMessage({

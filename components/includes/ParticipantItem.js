@@ -22,6 +22,7 @@ function ParticipantItem(props) {
   const [favorite, setFavorite] = useState(false);
   const [token, setToken] = useState();
   const dispatch = useDispatch();
+
   useEffect(() => {
     AsyncStorage.getItem("token").then((result) => {
       if (result) {
@@ -36,7 +37,10 @@ function ParticipantItem(props) {
     } else {
       setFavorite(false);
     }
-  }, [likedList]);
+
+    console.log(favorites);
+  }, []);
+
   return (
     <>
       {favorites === "Избранное" && favorite && (

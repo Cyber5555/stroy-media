@@ -460,7 +460,7 @@ function Offers(props) {
           renderItem={renderItem}
           ListHeaderComponent={headerComponent()}
           ListFooterComponent={() => {
-            return data.length && activeTab !== "Избранное" ? (
+            return data.length === 5 && activeTab !== "Избранное" ? (
               <View
                 style={{
                   flex: 1,

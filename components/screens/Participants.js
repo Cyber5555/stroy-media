@@ -41,12 +41,14 @@ function Participants(props) {
   const { route, navigation } = props;
   const { currentPage } = route.params;
   const dispatch = useDispatch();
+
   useEffect(() => {
     AsyncStorage.getItem("token").then((result) => {
       if (result) {
         setToken(result);
       }
     });
+
     dispatch(getCitys())
       .unwrap()
       .then((result) => {
@@ -58,9 +60,9 @@ function Participants(props) {
     dispatch(getMembersReques({ token, offset }))
       .unwrap()
       .then((res) => {
-        // console.log(res?.data?.data.company[0].likes, "resssssssssssssss");
-        setLikedList(res?.data?.data.company[0].likes);
+        setLikedList(res.data?.data?.isLike);
       });
+    console.log(likedList,'likedlist');
   }, [token, page]);
 
   const resetText = () => {
@@ -222,7 +224,7 @@ function Participants(props) {
           justifyContent: "center",
         }}
       >
-        {activeTab !== "Избранное" && members?.length ? (
+        {activeTab !== "Избранное" && members?.length === 5 ? (
           <>
             <View>
               <TouchableOpacity

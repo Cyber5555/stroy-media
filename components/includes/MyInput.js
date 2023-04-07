@@ -27,7 +27,6 @@ function MyInput({
   isGray,
   placeholder,
   secureTextEntry,
-  onChangeText,
   ...p
 }) {
   // constructor(props) {
@@ -54,8 +53,8 @@ function MyInput({
         {...p}
         maxLength={numberTel ? 10 : 100000}
         keyboardType={keyboardType}
-        onChangeText={onChangeText}
         placeholderTextColor={"black"}
+        secureTextEntry={secureTextEntry}
         placeholder={
           !isActive && !phoneNumber && numberTel
             ? phoneNumber

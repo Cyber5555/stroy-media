@@ -9,7 +9,7 @@ export const allCatRequest = createAsyncThunk(
       const result = await api.post("/cat-request-all", {
         secret_token: token,
         type_request: tab === "В работе" ? "onwork" : "draft",
-        offset,
+        // offset,
       });
       return result;
     } catch (err) {
@@ -41,10 +41,6 @@ const allCatSlice = createSlice({
       .addCase(allCatRequest.fulfilled, (state, action) => {
         state.data = action.payload.data.data.aplications.aplications;
         state.error = false;
-        // console.log(
-        //   action.payload.data.data.aplications.aplications,
-        //   "state.data"
-        // );
       })
       .addCase(allCatRequest.rejected, (state) => {
         state.error = true;

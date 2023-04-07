@@ -29,7 +29,6 @@ function FilterItem(props) {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          console.log(item);
           // return false;
           setExpanded(false);
           onSelect(item);

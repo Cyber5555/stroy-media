@@ -124,7 +124,9 @@ const Login = () => {
             onChangeText={(val) => setEmailForNewPassword(val)}
             onCancel={() => {
               setShowForgotPasswordModal(false);
-              return setEmailForNewPassword("");
+              setEmailForNewPassword("");
+              setError("");
+              return;
             }}
           />
           <AnswerForgotPasswordModal

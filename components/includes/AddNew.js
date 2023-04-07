@@ -4,11 +4,15 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 class AddNew extends Component {
   render() {
-    const { onPress } = this.props;
+    const { onPress, end } = this.props;
     return (
       <TouchableOpacity
         onPress={onPress}
-        style={styles.wrapper}
+        style={[
+          styles.wrapper,
+          { alignSelf: end ? "flex-end" : "center" },
+          { right: end && 15 },
+        ]}
         activeOpacity={0.6}
       >
         <ImageAddNew />
@@ -19,7 +23,6 @@ class AddNew extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignSelf: "center",
     position: "absolute",
     bottom: 40,
   },
